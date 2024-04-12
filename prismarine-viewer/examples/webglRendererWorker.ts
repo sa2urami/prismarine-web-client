@@ -42,47 +42,20 @@ export const initWebglRenderer = async (canvas: HTMLCanvasElement, imageBlob: Im
     const program = createProgram(gl, VertShader, FragShaderOverride || FragShader)
 
     let vertices = new Float32Array([
-        -0.5, -0.5, -0.5, 0.0, 0.0, 0.0, // Bottom-let
-        0.5, -0.5, -0.5, 1.0, 0.0, 0.0, // bottom-right
-        0.5, 0.5, -0.5, 1.0, 1.0, 0.0, // top-right
-        0.5, 0.5, -0.5, 1.0, 1.0, 0.0, // top-right
-        -0.5, 0.5, -0.5, 0.0, 1.0, 0.0, // top-let
-        -0.5, -0.5, -0.5, 0.0, 0.0, 0.0, // bottom-let
-        // ront ace
-        -0.5, -0.5, 0.5, 0.0, 0.0, 1.0, // bottom-let
-        0.5, 0.5, 0.5, 1.0, 1.0, 1.0, // top-right
-        0.5, -0.5, 0.5, 1.0, 0.0, 1.0, // bottom-right
-        0.5, 0.5, 0.5, 1.0, 1.0, 1.0,// top-right
-        -0.5, -0.5, 0.5, 0.0, 0.0, 1.0,// bottom-let
-        -0.5, 0.5, 0.5, 0.0, 1.0, 1.0,// top-let
-        // Let ace
-        -0.5, 0.5, 0.5, 1.0, 0.0, 2.0,// top-right
-        -0.5, -0.5, -0.5, 0.0, 1.0, 2.0,// bottom-let
-        -0.5, 0.5, -0.5, 1.0, 1.0, 2.0,// top-let
-        -0.5, -0.5, -0.5, 0.0, 1.0, 2.0,// bottom-let
-        -0.5, 0.5, 0.5, 1.0, 0.0, 2.0, // top-right
-        -0.5, -0.5, 0.5, 0.0, 0.0, 2.0,// bottom-right
-        // Right ace
-        0.5, 0.5, 0.5, 1.0, 0.0, 3.0,// top-let
-        0.5, 0.5, -0.5, 1.0, 1.0, 3.0,// top-right
-        0.5, -0.5, -0.5, 0.0, 1.0, 3.0,// bottom-right
-        0.5, -0.5, -0.5, 0.0, 1.0, 3.0,// bottom-right
-        0.5, -0.5, 0.5, 0.0, 0.0, 3.0,// bottom-let
-        0.5, 0.5, 0.5, 1.0, 0.0, 3.0, // top-let
-        // Bottom ace
-        -0.5, -0.5, -0.5, 0.0, 1.0, 4.0,// top-right
-        0.5, -0.5, 0.5, 1.0, 0.0, 4.0,// bottom-let
-        0.5, -0.5, -0.5, 1.0, 1.0, 4.0,// top-let
-        0.5, -0.5, 0.5, 1.0, 0.0, 4.0, // bottom-let
-        -0.5, -0.5, -0.5, 0.0, 1.0, 4.0, // top-right
-        -0.5, -0.5, 0.5, 0.0, 0.0, 4.0, // bottom-right
-        // Top ace
-        -0.5, 0.5, -0.5, 0.0, 1.0, 5.0,// top-let
-        0.5, 0.5, -0.5, 1.0, 1.0, 5.0,// top-right
-        0.5, 0.5, 0.5, 1.0, 0.0, 5.0,// bottom-right
-        0.5, 0.5, 0.5, 1.0, 0.0, 5.0,// bottom-right
-        -0.5, 0.5, 0.5, 0.0, 0.0, 5.0,// bottom-let
-        -0.5, 0.5, -0.5, 0.0, 1.0, 5.0// top-let
+        -1.0,  1.0,  1.0, 0.0, 0.0,
+         1.0,  1.0,  1.0, 1.0, 0.0,
+        -1.0, -1.0,  1.0, 0.0, 1.0,
+         1.0, -1.0,  1.0, 1.0, 1.0,
+         1.0, -1.0, -1.0, 1.0, 0.0,
+         1.0,  1.0,  1.0, 0.0, 1.0,
+         1.0,  1.0, -1.0, 0.0, 0.0,
+        -1.0,  1.0,  1.0, 1.0, 1.0,
+        -1.0,  1.0, -1.0, 1.0, 0.0,
+        -1.0, -1.0,  1.0, 0.0, 1.0,
+        -1.0, -1.0, -1.0, 0.0, 0.0,
+         1.0, -1.0, -1.0, 1.0, 0.0,
+        -1.0,  1.0, -1.0, 0.0, 1.0,
+         1.0,  1.0, -1.0, 1.0, 1.0
     ])
 
     let NumberOfCube = isPlayground ? 1_000_000 : 5_000_000
@@ -147,14 +120,14 @@ export const initWebglRenderer = async (canvas: HTMLCanvasElement, imageBlob: Im
     // gl.bindBuffer(gl.ARRAY_BUFFER, VBO_sides)
     gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW)
 
-    gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 6 * 4, 0)
+    gl.vertexAttribPointer(0, 3, gl.FLOAT, false, 5 * 4, 0)
     gl.enableVertexAttribArray(0)
 
-    gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 6 * 4, 3 * 4)
+    gl.vertexAttribPointer(1, 2, gl.FLOAT, false, 5 * 4, 3 * 4)
     gl.enableVertexAttribArray(1)
 
-    gl.vertexAttribPointer(2, 1, gl.FLOAT, false, 6 * 4, 5 * 4)
-    gl.enableVertexAttribArray(2)
+    //gl.vertexAttribPointer(2, 1, gl.FLOAT, false, 6 * 4, 5 * 4)
+    //gl.enableVertexAttribArray(2)
     //instance data
 
     gl.enableVertexAttribArray(3);
@@ -359,7 +332,7 @@ export const initWebglRenderer = async (canvas: HTMLCanvasElement, imageBlob: Im
 
         camera.updateMatrix()
         if (!globalThis.stopRendering) {
-            gl.drawArraysInstanced(gl.TRIANGLES, 0, 36, isPlayground ? NumberOfCube : allBlocks.length);
+            gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 24, isPlayground ? NumberOfCube : allBlocks.length);
         }
         //gl.bindVertexArray(null)
 
